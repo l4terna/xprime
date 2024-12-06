@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - include:
+      - file: db/changelog/changes/1.0__create_roles.sql
+  - include:
+      - file: db/changelog/changes/1.1__insert_roles.sql
+  - include:
+      - file: db/changelog/changes/2.0__create_users.sql
+  - include:
+      - file: db/changelog/changes/3.0__create_regions.sql
+  - include:
+      - file: db/changelog/changes/4.0__create_disciplines.sql
+  - include:
+      - file: db/changelog/changes/5.0__create_event_base.sql
+  - include:
+      - file: db/changelog/changes/6.0__create_event_requests.sql
+  - include:
+      - file: db/changelog/changes/7.0__create_events.sql
+  - include:
+      - file: db/changelog/changes/8.0__create_event_disciplines.sql
