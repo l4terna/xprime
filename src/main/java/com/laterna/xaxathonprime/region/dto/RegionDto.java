@@ -11,6 +11,7 @@ public record RegionDto (
     String description,
     String contactEmail,
     LocalDateTime createdAt,
+    String imageUrl,
     UserDto user
 ) {}
 

@@ -1,5 +1,6 @@
 package com.laterna.xaxathonprime.region;
 
+import com.laterna.xaxathonprime.region.dto.CreateRegionDto;
 import com.laterna.xaxathonprime.region.dto.RegionDto;
 import com.laterna.xaxathonprime.region.dto.UpdateRegionDto;
 import lombok.RequiredArgsConstructor;
@@ -7,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -27,6 +29,12 @@ public class RegionController {
         PageRequest pageRequest = PageRequest.of(page, size, sort);
         Page<RegionDto> regions = regionService.findAll(search, pageRequest);
         return ResponseEntity.ok(regions);
+    }
+
+    @PostMapping
+    @PreAuthorize("hasAuthority('FSP_ADMIN')")
+    public ResponseEntity<RegionDto> createRegion(@RequestBody CreateRegionDto createRegionDto) {
+        return ResponseEntity.ok(regionService.createRegion(createRegionDto));
     }
 
     @GetMapping("/{id}")

@@ -1,6 +1,7 @@
 package com.laterna.xaxathonprime.region;
 
 import com.laterna.xaxathonprime._shared.context.UserContext;
+import com.laterna.xaxathonprime.region.dto.CreateRegionDto;
 import com.laterna.xaxathonprime.region.dto.RegionDto;
 import com.laterna.xaxathonprime.region.dto.UpdateRegionDto;
 import com.laterna.xaxathonprime.role.enumeration.RoleType;
@@ -16,6 +17,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
+
+import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -57,9 +60,17 @@ public class RegionService {
         Region region = regionRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Region not found with id: " + id));
 
-        region.setName(regionDto.name());
-        region.setContactEmail(regionDto.contactEmail());
-        region.setDescription(regionDto.description());
+        if(regionDto.name() != null) {
+            region.setName(regionDto.name());
+        }
+
+        if(regionDto.contactEmail() != null) {
+            region.setContactEmail(regionDto.contactEmail());  // Исправлено
+        }
+
+        if(regionDto.description() != null) {
+            region.setDescription(regionDto.description());    // Исправлено
+        }
 
         if (regionDto.userId() != null) {
             UserDto user = userService.findById(regionDto.userId());
@@ -93,5 +104,28 @@ public class RegionService {
         }
 
         regionRepository.delete(region);
+    }
+
+    @Transactional
+    @PreAuthorize("hasAuthority('FSP_ADMIN')")
+    public RegionDto createRegion(CreateRegionDto createRegionDto) {
+        if (createRegionDto.userId() != null) {
+            regionRepository.findByUserId(createRegionDto.userId())
+                    .ifPresent(region -> {
+                        throw new IllegalStateException("User is already assigned to another region");
+                    });
+        }
+
+        Region region = Region.builder()
+                .name(createRegionDto.name())
+                .description(createRegionDto.description())
+                .contactEmail(createRegionDto.contactEmail())
+                .imageUrl(createRegionDto.imageUrl())
+                .user(createRegionDto.userId() != null ?
+                        userMapper.toEntity(userService.findById(createRegionDto.userId())) :
+                        null)
+                .build();
+
+        return regionMapper.toDto(regionRepository.save(region));
     }
 }
