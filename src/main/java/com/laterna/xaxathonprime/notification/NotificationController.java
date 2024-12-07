@@ -23,12 +23,12 @@ public class NotificationController {
         return ResponseEntity.ok(notificationService.getNotifications(read, pageable));
     }
 
-    @PatchMapping("/{id}/mark-read")
+    @PutMapping("/{id}/mark-read")
     public ResponseEntity<NotificationDto> markAsRead(@PathVariable Long id) {
         return ResponseEntity.ok(notificationService.markAsRead(id));
     }
 
-    @PatchMapping("/mark-all-read")
+    @PutMapping("/mark-all-read")
     public ResponseEntity<Void> markAllAsRead() {
         notificationService.markAllAsRead();
         return ResponseEntity.ok().build();
