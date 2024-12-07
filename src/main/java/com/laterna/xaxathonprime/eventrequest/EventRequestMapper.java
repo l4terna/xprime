@@ -39,6 +39,7 @@ public interface EventRequestMapper {
                 region.getId(),
                 region.getName(),
                 region.getContactEmail(),
+                region.getDescription(),
                 region.getCreatedAt(),
                 mapUserWithoutRegionReference(region.getUser())
         );

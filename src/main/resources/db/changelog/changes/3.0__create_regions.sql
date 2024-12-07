@@ -13,3 +13,7 @@ CREATE TABLE IF NOT EXISTS regions (
 -- changeset laterna:2
 ALTER TABLE regions ADD COLUMN description TEXT;
 --rollback ALTER TABLE regions DROP COLUMN description;
+
+-- changeset laterna:3
+ALTER TABLE regions ADD COLUMN image_url VARCHAR(255);
+--rollback ALTER TABLE regions DROP COLUMN image_url;
