@@ -1,8 +1,9 @@
 package com.laterna.xaxathonprime.eventrequest;
 
+import com.laterna.xaxathonprime._shared.context.UserContext;
+import com.laterna.xaxathonprime.event.EventPdfService;
 import com.laterna.xaxathonprime.event.EventService;
 import com.laterna.xaxathonprime.event.dto.CreateEventDto;
-import com.laterna.xaxathonprime.eventbase.EventBase;
 import com.laterna.xaxathonprime.eventbase.EventBaseMapper;
 import com.laterna.xaxathonprime.eventbase.EventBaseService;
 import com.laterna.xaxathonprime.eventbase.dto.EventBaseDto;
@@ -16,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,6 +33,8 @@ public class EventRequestService {
     private final EventBaseMapper eventBaseMapper;
     private final EventService eventService;
     private final ApplicationEventPublisher eventPublisher;
+    private final UserContext userContext;
+    private final EventPdfService eventPdfService;
 
     @Transactional
     public EventRequestDto createRequest(CreateEventRequestDto createRequestDto) {
@@ -47,7 +51,6 @@ public class EventRequestService {
     @Transactional(readOnly = true)
     public Page<EventRequestDto> findAll(Pageable pageable, EventRequestStatus status) {
         if(status != null) {
-            System.out.println(eventRequestRepository.findAllByStatus(status, pageable));
             return eventRequestRepository.findAllByStatus(status, pageable).map(eventRequestMapper::toDto);
         }
 
@@ -80,6 +83,8 @@ public class EventRequestService {
         request.setStatus(EventRequestStatus.APPROVED);
         eventService.createEvent(new CreateEventDto(request));
 
+        eventPdfService.generateEventsPdf();
+
         eventPublisher.publishEvent(new EventApprovedEvent(
                 request.getId(),
                 request.getBase().getName(),
@@ -88,5 +93,20 @@ public class EventRequestService {
         ));
 
         return eventRequestMapper.toDto(eventRequestRepository.save(request));
+    }
+
+    @Transactional(readOnly = true)
+    public Page<EventRequestDto> getMyRequests(Pageable pageable, EventRequestStatus status) {
+        Long regionId = userContext.getCurrentUser().region().id();
+
+        if(regionId == null) {
+            throw new AccessDeniedException("You are not a regional representative");
+        }
+
+        if(status != null) {
+            return eventRequestRepository.findAllByBaseRegionIdAndStatus(regionId, status, pageable).map(eventRequestMapper::toDto);
+        }
+
+        return eventRequestRepository.findAllByBaseRegionId(regionId, pageable).map(eventRequestMapper::toDto);
     }
 }

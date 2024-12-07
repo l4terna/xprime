@@ -9,6 +9,12 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+@NamedEntityGraph(
+        name = "EventRequest.withBase",
+        attributeNodes = {
+                @NamedAttributeNode("base")
+        }
+)
 @Entity
 @Table(name = "event_requests")
 @Data

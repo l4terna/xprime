@@ -44,4 +44,7 @@ public class User extends BaseEntity {
 
     @OneToOne(mappedBy = "user")
     private Region region;
+
+    @Column(nullable = false)
+    private Boolean emailVerified;
 }

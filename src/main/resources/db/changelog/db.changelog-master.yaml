@@ -19,3 +19,5 @@ databaseChangeLog:
       - file: db/changelog/changes/8.0__create_event_disciplines.sql
   - include:
       - file: db/changelog/changes/9.0__create_notifications.sql
+  - include:
+      - file: db/changelog/changes/10.0__create_verification_tokens.sql

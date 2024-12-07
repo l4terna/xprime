@@ -20,7 +20,7 @@ public class EventRequestController {
 
     @GetMapping
     @PreAuthorize("hasAuthority('FSP_ADMIN')")
-    public ResponseEntity<Page<EventRequestDto>> getEvents(
+    public ResponseEntity<Page<EventRequestDto>> getEventRequests(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "30") int size,
             @RequestParam(defaultValue = "desc") String direction,
@@ -36,6 +36,20 @@ public class EventRequestController {
     @PreAuthorize("hasAuthority('REGION_ADMIN')")
     public ResponseEntity<EventRequestDto> createRequest(@RequestBody CreateEventRequestDto createRequestDto) {
         return ResponseEntity.ok(eventRequestService.createRequest(createRequestDto));
+    }
+
+    @GetMapping("/my")
+    @PreAuthorize("hasAnyAuthority('FSP_ADMIN', 'REGION_ADMIN')")
+    public ResponseEntity<Page<EventRequestDto>> getMyRequests(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "30") int size,
+            @RequestParam(defaultValue = "desc") String direction,
+            @RequestParam(required = false) EventRequestStatus status
+    ) {
+        Sort sort = Sort.by(Sort.Direction.fromString(direction), "id");
+        PageRequest pageRequest = PageRequest.of(page, size, sort);
+        Page<EventRequestDto> regions = eventRequestService.getMyRequests(pageRequest, status);
+        return ResponseEntity.ok(regions);
     }
 
     @GetMapping("/{id}")

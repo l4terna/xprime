@@ -1,6 +1,8 @@
 package com.laterna.xaxathonprime.user;
 
 import com.laterna.xaxathonprime._shared.context.UserContext;
+import com.laterna.xaxathonprime.emailverification.EmailVerificationService;
+import com.laterna.xaxathonprime.emailverification.VerificationManagementService;
 import com.laterna.xaxathonprime.role.Role;
 import com.laterna.xaxathonprime.role.RoleMapper;
 import com.laterna.xaxathonprime.role.RoleService;
@@ -17,8 +19,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Set;
-
 
 @Service
 @RequiredArgsConstructor
@@ -28,7 +28,7 @@ public class UserService {
     private final UserMapper userMapper;
     private final RoleService roleService;
     private final UserContext userContext;
-    private final RoleMapper roleMapper;
+    private final VerificationManagementService verificationManagementService;
 
     @Transactional
     public UserDto create(CreateUserDto createUserDto) {
@@ -47,7 +47,11 @@ public class UserService {
                 .password(passwordEncoder.encode(createUserDto.password()))
                 .build();
 
-        return userMapper.toDto(userRepository.save(user));
+        UserDto savedUser = userMapper.toDto(userRepository.save(user));
+
+        verificationManagementService.handleUserCreation(savedUser);
+
+        return savedUser;
     }
 
     @Transactional(readOnly = true)
@@ -72,15 +76,6 @@ public class UserService {
 
         User currentUser = userMapper.toEntity(userContext.getCurrentUser());
 
-        if (currentUser.getId().equals(id) && updateUserDto.roleId() != null) {
-            throw new AccessDeniedException("You cannot change your own role");
-        }
-
-        if (updateUserDto.roleId() != null) {
-            RoleDto newRole = roleService.findById(updateUserDto.roleId());
-            validateRoleAssignment(currentUser, newRole);
-        }
-
         if (!currentUser.getId().equals(id)) {
             validateUserEditPermissions(currentUser, existingUser);
         }
@@ -97,24 +92,7 @@ public class UserService {
             existingUser.setPatronymic(updateUserDto.patronymic());
         }
 
-        if (updateUserDto.roleId() != null) {
-            existingUser.setRole(roleMapper.toEntity(roleService.findById(updateUserDto.roleId())));
-        }
-
         return userMapper.toDto(userRepository.save(existingUser));
-    }
-
-    private void validateRoleAssignment(User currentUser, RoleDto newRole) {
-        try {
-            RoleType currentRoleType = RoleType.valueOf(currentUser.getRole().getName());
-            RoleType newRoleType = RoleType.valueOf(newRole.name());
-
-            if (getRoleLevel(currentRoleType) <= getRoleLevel(newRoleType)) {
-                throw new AccessDeniedException("You cannot assign role of equal or higher level than your own");
-            }
-        } catch (IllegalArgumentException e) {
-            throw new EntityNotFoundException("Invalid role type");
-        }
     }
 
     private void validateUserEditPermissions(User currentUser, User targetUser) {
@@ -161,5 +139,17 @@ public class UserService {
         return userRepository.findById(id)
                 .map(userMapper::toDto)
                 .orElseThrow(() -> new EntityNotFoundException("User with id " + id + " not found"));
+    }
+
+    @Transactional
+    public UserDto save(User user) {
+        return userMapper.toDto(userRepository.save(user));
+    }
+
+    @Transactional(readOnly = true)
+    public UserDto findByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .map(userMapper::toDto)
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
     }
 }

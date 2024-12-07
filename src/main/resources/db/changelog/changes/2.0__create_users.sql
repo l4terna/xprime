@@ -12,3 +12,9 @@ CREATE TABLE IF NOT EXISTS users(
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 --rollback DROP TABLE users;
+
+-- changeset laterna:2
+ALTER TABLE users
+ADD COLUMN IF NOT EXISTS email_verified BOOLEAN DEFAULT FALSE;
+
+--rollback ALTER TABLE users DROP COLUMN IF EXISTS email_verified;
