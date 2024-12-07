@@ -32,7 +32,7 @@ public class EventBaseService {
 
     @Transactional
     public EventBaseDto create(CreateEventBaseDto createEventBaseDto) {
-        Region region = regionMapper.toEntity(regionService.getRegion(userContext.getCurrentUserId()));
+        Region region = regionMapper.toEntity(regionService.getRegion(createEventBaseDto.regionId()));
         Set<Discipline> disciplines = disciplineService.findAllById(createEventBaseDto.disciplines())
                 .stream()
                 .map(disciplineMapper::toEntity)
