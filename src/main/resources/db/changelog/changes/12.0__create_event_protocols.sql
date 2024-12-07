@@ -1,7 +1,7 @@
 -- liquibase formatted sql
 
--- changeset author:your_name:1
-CREATE TABLE event_protocols (
+-- changeset laterna:1
+CREATE TABLE IF NOT EXISTS event_protocols (
      id BIGSERIAL PRIMARY KEY,
      original_file_name VARCHAR(255) NOT NULL,
      stored_file_name VARCHAR(255) NOT NULL,

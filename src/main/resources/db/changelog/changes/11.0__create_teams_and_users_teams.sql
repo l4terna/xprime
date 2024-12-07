@@ -1,7 +1,7 @@
 
 -- liquibase formatted sql
 -- changeset laterna:1
-CREATE TABLE teams (
+CREATE TABLE  teams (
    id BIGSERIAL PRIMARY KEY,
    name VARCHAR(255) NOT NULL,
    description TEXT,
