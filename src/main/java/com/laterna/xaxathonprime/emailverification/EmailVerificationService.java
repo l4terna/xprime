@@ -10,7 +10,6 @@ import com.laterna.xaxathonprime.verificationtoken.VerificationTokenService;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
@@ -20,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class EmailVerificationService {
     private final UserService userService;
@@ -45,6 +45,7 @@ public class EmailVerificationService {
     }
 
     @Async
+    @Transactional
     public void sendPasswordResetEmail(ResetPasswordDto resetPasswordDto) {
         try {
             UserDto user = userService.findByEmail(resetPasswordDto.email());
@@ -87,6 +88,7 @@ public class EmailVerificationService {
             """, token);
     }
 
+    @Transactional
     public void verifyEmail(String token) {
         VerificationToken verificationToken = tokenService.findByToken(token);
 
@@ -104,6 +106,7 @@ public class EmailVerificationService {
         tokenService.deleteToken(verificationToken);
     }
 
+    @Transactional
     public void resendVerificationEmail(String email) {
         UserDto user = userService.findByEmail(email);
 
