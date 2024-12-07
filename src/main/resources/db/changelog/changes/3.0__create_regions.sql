@@ -9,3 +9,7 @@ CREATE TABLE IF NOT EXISTS regions (
      contact_email VARCHAR(255)
 );
 --rollback DROP TABLE regions;
+
+-- changeset laterna:2
+ALTER TABLE regions ADD COLUMN description TEXT;
+--rollback ALTER TABLE regions DROP COLUMN description;

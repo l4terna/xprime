@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public interface EventRepository extends JpaRepository<Event, Long>, JpaSpecificationExecutor<Event> {
+interface EventRepository extends JpaRepository<Event, Long>, JpaSpecificationExecutor<Event> {
     @Query("SELECT e FROM Event e " +
             "JOIN FETCH e.base b " +
             "LEFT JOIN FETCH b.region " +

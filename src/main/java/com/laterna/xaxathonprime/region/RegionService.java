@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -38,6 +39,12 @@ public class RegionService {
         return regionsPage.map(regionMapper::toDto);
     }
 
+    public RegionDto findById(Long id) {
+        return regionRepository.findById(id)
+                .map(regionMapper::toDto)
+                .orElseThrow(() -> new EntityNotFoundException("Region not found"));
+    }
+
     @Transactional(readOnly = true)
     public RegionDto getRegion(Long id) {
         return regionRepository.findById(id)
@@ -56,6 +63,7 @@ public class RegionService {
 
         region.setName(regionDto.name());
         region.setContactEmail(regionDto.contactEmail());
+        region.setDescription(regionDto.description());
 
         if (regionDto.userId() != null) {
             UserDto user = userService.findById(regionDto.userId());
@@ -71,5 +79,23 @@ public class RegionService {
         }
 
         return regionMapper.toDto(regionRepository.save(region));
+    }
+
+    @Transactional
+    @PreAuthorize("hasAnyAuthority('FSP_ADMIN')")
+    public void deleteRegion(Long id) {
+        if (!userContext.getCurrentUser().role().name().equals(RoleType.FSP_ADMIN.name())) {
+            throw new AccessDeniedException("You do not have permission to delete this region");
+        }
+
+        Region region = regionRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Region not found with id: " + id));
+
+        if (region.getUser() != null) {
+            region.setUser(null);
+            regionRepository.save(region);
+        }
+
+        regionRepository.delete(region);
     }
 }

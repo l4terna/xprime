@@ -38,4 +38,10 @@ public class RegionController {
     public ResponseEntity<RegionDto> updateRegion(@PathVariable Long id, @RequestBody UpdateRegionDto regionDto) {
         return ResponseEntity.ok(regionService.updateRegion(id, regionDto));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteRegion(@PathVariable Long id) {
+        regionService.deleteRegion(id);
+        return ResponseEntity.noContent().build();
+    }
 }

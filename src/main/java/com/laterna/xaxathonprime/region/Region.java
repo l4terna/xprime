@@ -23,6 +23,7 @@ public class Region extends BaseEntity {
     private String name;
 
     private String contactEmail;
+    private String description;
 
     @CreatedDate
     private LocalDateTime createdAt;

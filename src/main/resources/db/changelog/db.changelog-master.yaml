@@ -23,3 +23,5 @@ databaseChangeLog:
       - file: db/changelog/changes/10.0__create_verification_tokens.sql
   - include:
       - file: db/changelog/changes/11.0__create_teams_and_users_teams.sql
+  - include:
+      - file: db/changelog/changes/12.__create_event_protocols.sql
