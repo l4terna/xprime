@@ -1,0 +1,892 @@
+[
+  {
+    "subject": "г. Москва",
+    "leader": {
+      "family_name": "Анашкин",
+      "first_name": "Евгений",
+      "middle_name": "Юрьевич"
+    },
+    "contact": "fspmsk@mail.ru",
+    "image_url": "https://fsp-russia.com/upload/iblock/7b0/5n5imvtfzfn32tcqsdr2ce5adv7z73qv.jpg"
+  },
+  {
+    "subject": "Белгородская область",
+    "leader": {
+      "family_name": null,
+      "first_name": null,
+      "middle_name": null
+    },
+    "contact": "belgorod@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/90a/zdd6rs7puopkzzq3tng1o2mu8vzxir4y.jpg"
+  },
+  {
+    "subject": "Брянская область",
+    "leader": {
+      "family_name": "Казаков",
+      "first_name": "Олег",
+      "middle_name": "Дмитриевич"
+    },
+    "contact": "bryansk@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/818/8e7wp6rwysn3cix42blhcypyul1r78kd.jpg"
+  },
+  {
+    "subject": "Владимирская область",
+    "leader": {
+      "family_name": "Лисова",
+      "first_name": "Анастасия",
+      "middle_name": "Андреевна"
+    },
+    "contact": "vladimir@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/a99/1c7rnluv1hd0l8vt5zxkccrs4kt33wyj.jpg"
+  },
+  {
+    "subject": "Воронежская область",
+    "leader": {
+      "family_name": "Ульянов",
+      "first_name": "Владимир",
+      "middle_name": null
+    },
+    "contact": "voronezh@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/010/77pl2zd2p1268s9k9quh1i66140ojdyl.jpg"
+  },
+  {
+    "subject": "Ивановская область",
+    "leader": {
+      "family_name": "Уралов",
+      "first_name": "Сергей",
+      "middle_name": "Дмитриевич"
+    },
+    "contact": "lvanovo@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/3ab/izz9pc2hucrsl11sf4ach6d0p9zahqj1.jpg"
+  },
+  {
+    "subject": "Калужская область",
+    "leader": {
+      "family_name": "Колесников",
+      "first_name": "Алексей",
+      "middle_name": null
+    },
+    "contact": "kaluga@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/72d/xbtciyatn40joev77bpjk0a22k5ifs67.jpg"
+  },
+  {
+    "subject": "Костромская область",
+    "leader": {
+      "family_name": "Диденко",
+      "first_name": "Дмитрий",
+      "middle_name": "Николаевич"
+    },
+    "contact": "kostroma@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/117/wvcm4npgo9nx3op6ywxo943abgwar8ze.jpg"
+  },
+  {
+    "subject": "Курская область",
+    "leader": {
+      "family_name": "Журавлев",
+      "first_name": "Владимир",
+      "middle_name": "Борисович"
+    },
+    "contact": "kursk@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/813/dt1qtj0mhez75bkd37cgda5a9tb9b5m8.jpg"
+  },
+  {
+    "subject": "Липецкая область",
+    "leader": {
+      "family_name": "Даниил",
+      "first_name": "Сапронов",
+      "middle_name": null
+    },
+    "contact": "lipetsk@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/7a1/f75k17emdbojn6n94lrpadyak9pso032.jpg"
+  },
+  {
+    "subject": "Московская область",
+    "leader": {
+      "family_name": "Анашкин",
+      "first_name": "Евгений",
+      "middle_name": "Юрьевич"
+    },
+    "contact": "moscow-obl@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/ed1/g6n33a11szyzcp9slgpqewrgbafl8ds3.jpg"
+  },
+  {
+    "subject": "Орловская область",
+    "leader": {
+      "family_name": "Семкин",
+      "first_name": "Александр",
+      "middle_name": "Николаевич"
+    },
+    "contact": "oryol@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/b59/07j0o8wrfg4nh8i5wiyncz5p8qw98q0m.jpg"
+  },
+  {
+    "subject": "Рязанская область",
+    "leader": {
+      "family_name": "Халамцева",
+      "first_name": "Евгения",
+      "middle_name": "Милмировна"
+    },
+    "contact": "ryazan@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/ce3/6przwt0ypcar93ma7rtv9hy8xov56out.jpg"
+  },
+  {
+    "subject": "Смоленская область",
+    "leader": {
+      "family_name": "Образцов",
+      "first_name": "Сергей",
+      "middle_name": "Александрович"
+    },
+    "contact": "smolensk@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/b1d/6zvtdehidc4gww1i0kd4gmuiysuow7n6.jpg"
+  },
+  {
+    "subject": "Тамбовская область",
+    "leader": {
+      "family_name": null,
+      "first_name": null,
+      "middle_name": null
+    },
+    "contact": "tambov@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/a0d/r028mo90uqrcipec1tkr922yx513reue.jpg"
+  },
+  {
+    "subject": "Тверская область",
+    "leader": {
+      "family_name": "Пожидаев",
+      "first_name": "Петр",
+      "middle_name": "Вячеславович"
+    },
+    "contact": "tver@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/176/6ddp6ck2yzara0ytqwrub1k5wh17poy8.jpg"
+  },
+  {
+    "subject": "Тульская область",
+    "leader": {
+      "family_name": "Сычугов",
+      "first_name": "Алексей",
+      "middle_name": "Алексеевич"
+    },
+    "contact": "tula@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/8a2/gvyqx5ib4z474ykva3klyse3idjqlzys.jpg"
+  },
+  {
+    "subject": "Ярославская область",
+    "leader": {
+      "family_name": "Чалый",
+      "first_name": "Дмитрий",
+      "middle_name": "Юрьевич"
+    },
+    "contact": "yaroslavl@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/454/ivnf4abzdjz2mqg22y118ianrhu0dlo3.jpg"
+  },
+  {
+    "subject": "Республика Адыгея",
+    "leader": {
+      "family_name": "Алиев",
+      "first_name": "Марат",
+      "middle_name": "Вячеславович"
+    },
+    "contact": "adygea@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/18f/0jgklfvu5hyukggqrinirihnyat97rwb.jpg"
+  },
+  {
+    "subject": "Республика Калмыкия",
+    "leader": {
+      "family_name": "Муниев",
+      "first_name": "Аркадий",
+      "middle_name": "Михайлович"
+    },
+    "contact": "kalmykia@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/0da/yocsbyxohcgsvwz3qbctpr69ibkemvoa.jpg"
+  },
+  {
+    "subject": "Краснодарский край",
+    "leader": {
+      "family_name": "Алферов",
+      "first_name": "Сергей",
+      "middle_name": "Сергеевич"
+    },
+    "contact": "krasnodar@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/820/mcqxi2s5h1dbb1e96r701mbjluzpifs8.jpg"
+  },
+  {
+    "subject": "Астраханская область",
+    "leader": {
+      "family_name": "Асадуллина",
+      "first_name": "Юлия",
+      "middle_name": "Альбертовна"
+    },
+    "contact": "astrakhan@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/71b/7720gkmxx1k3o36non3b2tck83o3didi.jpg"
+  },
+  {
+    "subject": "Волгоградская область",
+    "leader": {
+      "family_name": "Попова",
+      "first_name": "Елена",
+      "middle_name": "Владимировна"
+    },
+    "contact": "volgograd@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/ef0/a4j4cwsj1xerjf3z6938plgpo44115cb.jpg"
+  },
+  {
+    "subject": "Ростовская область",
+    "leader": {
+      "family_name": "Савва",
+      "first_name": "Станислав",
+      "middle_name": "Анатольевич"
+    },
+    "contact": "rostov@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/759/61glsmminfhyerkpfrxtfyzk07yrh51r.jpg"
+  },
+  {
+    "subject": "город Севастополь",
+    "leader": {
+      "family_name": "Царенко",
+      "first_name": "Михаил",
+      "middle_name": "Геннадьевич"
+    },
+    "contact": "sevastopol@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/892/dijsncgdz5se0xxhu0ozme0x4ghlwomq.jpg"
+  },
+  {
+    "subject": "Республика Крым",
+    "leader": {
+      "family_name": "Зырянов",
+      "first_name": "Сергей",
+      "middle_name": "Геннадиевич"
+    },
+    "contact": "crimea@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/d8f/5a4i80y0t86pa8rwt3c8pfddk7seskgi.jpg"
+  },
+  {
+    "subject": "Республика Карелия",
+    "leader": {
+      "family_name": "Каширин",
+      "first_name": "Александр",
+      "middle_name": "Алексеевич"
+    },
+    "contact": "karelia@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/4e2/23qgas5621kvuw3li7n9kihqlk8bxpqc.jpg"
+  },
+  {
+    "subject": "Республика Коми",
+    "leader": {
+      "family_name": "Некрасов",
+      "first_name": "Александр",
+      "middle_name": "Николаевич"
+    },
+    "contact": "komi@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/b73/02dee6q1u6vg604a1njjovyom7zhh4o4.jpg"
+  },
+  {
+    "subject": "Архангельская область",
+    "leader": {
+      "family_name": "Алексей",
+      "first_name": "Алескандрович",
+      "middle_name": "Лисьев"
+    },
+    "contact": "arkhangelsk@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/23c/j8pq20g2g6g0da73djdy7f52vf8nqw69.jpg"
+  },
+  {
+    "subject": "Калининградская область",
+    "leader": {
+      "family_name": "Дубинин",
+      "first_name": "Иван",
+      "middle_name": "Витальевич"
+    },
+    "contact": "info@fsp-kaliningrad.ru",
+    "image_url": "https://fsp-russia.com/upload/iblock/787/9xxtt1brhrcrznjdvva1yiedgvwxxyyo.jpg"
+  },
+  {
+    "subject": "Ленинградская область",
+    "leader": {
+      "family_name": "Корф",
+      "first_name": "Виктор",
+      "middle_name": "Сергеевич"
+    },
+    "contact": "leningrad@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/bec/xcapgnwi1w2l9uf9nwfji1o7f9wr8blu.jpg"
+  },
+  {
+    "subject": "Мурманская область",
+    "leader": {
+      "family_name": "Шляпников",
+      "first_name": "Денис",
+      "middle_name": "Игоревич"
+    },
+    "contact": "murmansk@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/71a/ntlibcnwm53vxreyadwbyg5h0z0cakgo.jpg"
+  },
+  {
+    "subject": "Новгородская область",
+    "leader": {
+      "family_name": "Богданов",
+      "first_name": "Михаил",
+      "middle_name": "Михайлович"
+    },
+    "contact": "novgorod@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/30a/6uhkt0rwlcoo3dzlh3xtgimy3c1cxvo6.jpg"
+  },
+  {
+    "subject": "Псковская область",
+    "leader": {
+      "family_name": "Степаненков",
+      "first_name": "Марк",
+      "middle_name": "Валерьевич"
+    },
+    "contact": "pskov@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/c66/215ud67l0q5f5ipdwhgrunobi3u16zgk.jpg"
+  },
+  {
+    "subject": "Ненецкий автономный округ",
+    "leader": {
+      "family_name": "Демчик",
+      "first_name": "Ирина",
+      "middle_name": "Игоревна"
+    },
+    "contact": "nenets@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/4f8/ft0vr54jb2dtr4oh5ury6o4il5hmmzlo.jpg"
+  },
+  {
+    "subject": "Вологодская область",
+    "leader": {
+      "family_name": "Мельников",
+      "first_name": "Олег",
+      "middle_name": "Николаевич"
+    },
+    "contact": "vologda@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/57a/jndiv9yx8odi8hp93qbi88gzngqvf5vx.jpg"
+  },
+  {
+    "subject": "г. Санкт Петербург",
+    "leader": {
+      "family_name": "Кувиков",
+      "first_name": "Денис",
+      "middle_name": null
+    },
+    "contact": "saint-petersburg@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/635/fgefa46p3zl1hztcx5i14t9f02oq50tt.jpg"
+  },
+  {
+    "subject": "Республика Саха-Якутия",
+    "leader": {
+      "family_name": "Николаев",
+      "first_name": "Николай",
+      "middle_name": "Борисович"
+    },
+    "contact": "sakha@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/ef1/z2dxw8rl2z4wb7iufro5n4uviokrbx1a.jpg"
+  },
+  {
+    "subject": "Камчатский край",
+    "leader": {
+      "family_name": "Дресвянский",
+      "first_name": "Владимир",
+      "middle_name": "Сергеевич"
+    },
+    "contact": "kamchatka@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/a14/qcmt7xapkn6o9cvkp30725bzwr455mvx.jpg"
+  },
+  {
+    "subject": "Приморский край",
+    "leader": {
+      "family_name": "Снитко",
+      "first_name": "Владимир",
+      "middle_name": "Алексеевич"
+    },
+    "contact": "primorsky@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/4d9/f808pi0klhm1bxkxvmwktlxcagkpi3nz.jpg"
+  },
+  {
+    "subject": "Хабаровский край",
+    "leader": {
+      "family_name": "Бородинов",
+      "first_name": "Николай",
+      "middle_name": "Александрович"
+    },
+    "contact": "khabarovsk@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/ed2/s4ee1n5jroyiu6kbotw1aw3d37lg62nq.jpg"
+  },
+  {
+    "subject": "Амурская область",
+    "leader": {
+      "family_name": "Попов",
+      "first_name": "Руслан",
+      "middle_name": "Игоревич"
+    },
+    "contact": "amur@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/b70/6gv2x61g21ldww192x8y3xn9qyuhsgs7.jpg"
+  },
+  {
+    "subject": "Магаданская область",
+    "leader": {
+      "family_name": "Бережной",
+      "first_name": "Антон",
+      "middle_name": "Константинович"
+    },
+    "contact": "magadan@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/11e/3513yn2otclb02fn8ap77wx8sledoh8k.jpg"
+  },
+  {
+    "subject": "Республика Бурятия",
+    "leader": {
+      "family_name": "Пьянников",
+      "first_name": "Владимир",
+      "middle_name": "Сергеевич"
+    },
+    "contact": "buryatia@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/c54/29svg226207h8yar0e3nn0zcq4i973r3.jpg"
+  },
+  {
+    "subject": "Забайкальский край",
+    "leader": {
+      "family_name": "Метельский",
+      "first_name": "Тарас",
+      "middle_name": "Леонидович"
+    },
+    "contact": "zabaykalsky@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/db5/kw3k1hjlcwk9jt32swi6fwelr7ka2lhu.jpg"
+  },
+  {
+    "subject": "Сахалинская область",
+    "leader": {
+      "family_name": "Соболев",
+      "first_name": "Евгений",
+      "middle_name": "Игоревич"
+    },
+    "contact": "sakhalin@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/01a/cfnrjosbelh201wnkpd9r17tp0ycrcma.jpg"
+  },
+  {
+    "subject": "Еврейский АО",
+    "leader": {
+      "family_name": "Пешков",
+      "first_name": "Григорий",
+      "middle_name": "Сергеевич"
+    },
+    "contact": "jewish@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/db6/vsty7gls7vdhdfrtiifsc5m4blhvelyh.jpg"
+  },
+  {
+    "subject": "Чукотский АО",
+    "leader": {
+      "family_name": "Косов",
+      "first_name": "Георгий",
+      "middle_name": "Александрович"
+    },
+    "contact": "chukotka@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/6c3/31aj96q7csh4vgz6wg1el5q4cvqknmxp.jpg"
+  },
+  {
+    "subject": "Республика Алтай",
+    "leader": {
+      "family_name": "Шило",
+      "first_name": "Светлана",
+      "middle_name": "Анатольевна"
+    },
+    "contact": "altai@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/be3/d5ebrd2f329rzjftihgf2z3et70hlbvm.jpg"
+  },
+  {
+    "subject": "Республика Тыва",
+    "leader": {
+      "family_name": "Оюн",
+      "first_name": "Субудай",
+      "middle_name": "Викторович"
+    },
+    "contact": "tuva@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/e21/bje5xj1bkj84mj1n18kr5voxzmwr1zhb.jpg"
+  },
+  {
+    "subject": "Республика Хакасия",
+    "leader": {
+      "family_name": "Шпигальский",
+      "first_name": "Денис",
+      "middle_name": "Олегович"
+    },
+    "contact": "khakassia@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/879/htyeaem5o3qs4u93jh1o6qg1iz3af54o.jpg"
+  },
+  {
+    "subject": "Алтайский край",
+    "leader": {
+      "family_name": "Егораев",
+      "first_name": "Алексей",
+      "middle_name": "Анатольевич"
+    },
+    "contact": "altai-k@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/822/pm0b2uz13r5nfjantzana1r3j0e36n8i.jpg"
+  },
+  {
+    "subject": "Красноярский край",
+    "leader": {
+      "family_name": "Капулин",
+      "first_name": "Денис",
+      "middle_name": "Владимирович"
+    },
+    "contact": "krasnoyarsk@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/98c/8vgrq2qqftck3uqgryscx1x0uib9a8fc.jpg"
+  },
+  {
+    "subject": "Иркутская область",
+    "leader": {
+      "family_name": "Ищенко",
+      "first_name": "Роман",
+      "middle_name": null
+    },
+    "contact": "irkutsk@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/a85/wu1uqone2s27759afdp2j3agd0kexwb1.jpg"
+  },
+  {
+    "subject": "Кемеровская область - Кузбасс",
+    "leader": {
+      "family_name": "Попов",
+      "first_name": "Александр",
+      "middle_name": "Сергеевич"
+    },
+    "contact": "kuzbass@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/27e/j53vmqf2wajy1vg71doajogw4zjalr6x.jpg"
+  },
+  {
+    "subject": "Новосибирская область",
+    "leader": {
+      "family_name": "Данилов",
+      "first_name": "Максим",
+      "middle_name": "Олегович"
+    },
+    "contact": "novosiblrsk@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/c7c/5wv1fvut6fpyfwe8gocsrmvonb4i7u7l.jpg"
+  },
+  {
+    "subject": "Омская область",
+    "leader": {
+      "family_name": "Иванищев",
+      "first_name": "Юрий",
+      "middle_name": "Ильич"
+    },
+    "contact": "omsk@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/ffd/bkwcs7df10mjam1qm0g5aucrekjpmdfx.jpg"
+  },
+  {
+    "subject": "Томская область",
+    "leader": {
+      "family_name": "Буинцев",
+      "first_name": "Дмитрий",
+      "middle_name": "Николаевич"
+    },
+    "contact": "tomsk@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/3bb/kee5mhggd0p3ssmr6e25mf4ltjyub2f0.jpg"
+  },
+  {
+    "subject": "Курганская область",
+    "leader": {
+      "family_name": "Белоусов",
+      "first_name": "Михаил",
+      "middle_name": "Александрович"
+    },
+    "contact": "kurgan@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/53a/4846rggi947ybs85yli64oyvmd1105qp.jpg"
+  },
+  {
+    "subject": "Свердловская область",
+    "leader": {
+      "family_name": "Обабков",
+      "first_name": "Илья",
+      "middle_name": "Николаевич"
+    },
+    "contact": "sverdlovsk@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/24d/fz65lydsdlmifn2aa7von0aiwjnsqzu1.jpg"
+  },
+  {
+    "subject": "Тюменская область",
+    "leader": {
+      "family_name": "Сенкевич",
+      "first_name": "Людмила",
+      "middle_name": "Борисовна"
+    },
+    "contact": "tyumen@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/b74/c5vh3pnyt8t579kl9apx33zv03a7dmjj.jpg"
+  },
+  {
+    "subject": "Челябинская область",
+    "leader": {
+      "family_name": "Нечет",
+      "first_name": "Сергей",
+      "middle_name": "Геннадьевич"
+    },
+    "contact": "chelyablnsk@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/7de/p9sy48aw41v26i1v8twrjxwzmw6863jx.jpg"
+  },
+  {
+    "subject": "Ханты-Мансийский автономный округ – Югра",
+    "leader": {
+      "family_name": "Давлетшин",
+      "first_name": "Родион",
+      "middle_name": "Айратович"
+    },
+    "contact": "hmao@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/f54/asnvytrv8f5r6v3jbydw17etbujt4ewb.jpg"
+  },
+  {
+    "subject": "Ямало-Ненецкий АО",
+    "leader": {
+      "family_name": "Гашимова",
+      "first_name": "Лариса",
+      "middle_name": "Павловна"
+    },
+    "contact": "yamalo-nenets@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/1df/zyw6zhf7hw2p985n6jqsgx3kuahnfztu.jpg"
+  },
+  {
+    "subject": "Республика Башкортостан",
+    "leader": {
+      "family_name": "Юлия",
+      "first_name": "Валиахметова",
+      "middle_name": null
+    },
+    "contact": "bashkortostan@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/1f9/b8iftevmxqil4dlcm62497jf6usz3mr1.jpg"
+  },
+  {
+    "subject": "Республика Марий Эл",
+    "leader": {
+      "family_name": "Куликова",
+      "first_name": "Екатерина",
+      "middle_name": "Ивановна"
+    },
+    "contact": "mari-ei@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/6c7/7d7t0c5g477xds7nen0vvgl8v0p5wipn.jpg"
+  },
+  {
+    "subject": "Республика Мордовия",
+    "leader": {
+      "family_name": "Бекшаев",
+      "first_name": "Дмитрий",
+      "middle_name": "Александрович"
+    },
+    "contact": "mordovia@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/9b0/mu6qd5jkr44lvhj9gchl2valy5bp38br.jpg"
+  },
+  {
+    "subject": "Республика Татарстан",
+    "leader": {
+      "family_name": "Серочудинов",
+      "first_name": "Евгений",
+      "middle_name": "Сергеевич"
+    },
+    "contact": "fsprt@inbox.ru",
+    "image_url": "https://fsp-russia.com/upload/iblock/723/oyrasmt0ad973vrlux489t8yiqyg1djz.jpg"
+  },
+  {
+    "subject": "Удмуртская Республика",
+    "leader": {
+      "family_name": "Пигалев",
+      "first_name": "Сергей",
+      "middle_name": "Александрович"
+    },
+    "contact": "udmurtia@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/bad/ysn9b59bwp8njnww9tjen7r2nzpytbgo.jpg"
+  },
+  {
+    "subject": "Чувашская Республика",
+    "leader": {
+      "family_name": "Набиев",
+      "first_name": "Александр",
+      "middle_name": "Эльдарович"
+    },
+    "contact": "fspchuv@mail.ru",
+    "image_url": "https://fsp-russia.com/upload/iblock/b2c/i2xdpi4m2drccjnu9v24vmqf80rnty88.jpg"
+  },
+  {
+    "subject": "Кировская область",
+    "leader": {
+      "family_name": "Кокарев",
+      "first_name": "Дмитрий",
+      "middle_name": "Михайлович"
+    },
+    "contact": "kirov@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/174/fvnx0cq47qrlsw0ez3tubeakl466tw7x.jpg"
+  },
+  {
+    "subject": "Нижегородская область",
+    "leader": {
+      "family_name": "Небольсин",
+      "first_name": "Михаил",
+      "middle_name": "Юрьевич"
+    },
+    "contact": "nizhny-novgorod@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/a95/u2xh21nx8xjcnaukcjzy6lab0s58e7t2.jpg"
+  },
+  {
+    "subject": "Оренбургская область",
+    "leader": {
+      "family_name": "Вечеренко",
+      "first_name": "Дмитрий",
+      "middle_name": "Сергеевич"
+    },
+    "contact": "orenburg@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/109/bnini3enbob0k84wiibqgtsnw1yyfx8n.jpg"
+  },
+  {
+    "subject": "Пензенская область",
+    "leader": {
+      "family_name": "Строителева",
+      "first_name": "Алина",
+      "middle_name": "Андреевна"
+    },
+    "contact": "penza@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/c31/oepriibdn4mwosj8w09zssziopov09ca.jpg"
+  },
+  {
+    "subject": "Пермский край",
+    "leader": {
+      "family_name": "Ягофаров",
+      "first_name": "Оскар",
+      "middle_name": "Фаитович"
+    },
+    "contact": "perm@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/cb9/7qx2ijea0e8sc5g8d6wepl9aytk3c4qt.jpg"
+  },
+  {
+    "subject": "Самарская область",
+    "leader": {
+      "family_name": "Бабенко",
+      "first_name": "Михаил",
+      "middle_name": "Владимирович"
+    },
+    "contact": "samara@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/8f2/emw9yyesaqvoiijt8z8702ye6tjfvkig.jpg"
+  },
+  {
+    "subject": "Саратовская область",
+    "leader": {
+      "family_name": "Федорова",
+      "first_name": "Антонина",
+      "middle_name": "Гавриловна"
+    },
+    "contact": "saratov@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/c49/2myab7t585flzrt9mpnwmfpawu57gx74.jpg"
+  },
+  {
+    "subject": "Ульяновская область",
+    "leader": {
+      "family_name": "Павлов",
+      "first_name": "Вадим",
+      "middle_name": "Вячеславович"
+    },
+    "contact": "ulyanovsk@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/1de/m3etwidocqnhhiz3cl17i68o578763eh.jpg"
+  },
+  {
+    "subject": "Республика Дагестан",
+    "leader": {
+      "family_name": "Абдулаев",
+      "first_name": "Магомед",
+      "middle_name": "Магомедгаджиевич"
+    },
+    "contact": "Fsprd@mail.ru",
+    "image_url": "https://fsp-russia.com/upload/iblock/d52/tzl13k7kd06kmv318xx60ju533v0rdz5.jpg"
+  },
+  {
+    "subject": "Республика Ингушетия",
+    "leader": {
+      "family_name": "Найденко",
+      "first_name": "Роман",
+      "middle_name": "Анатольевич"
+    },
+    "contact": "lngushetia@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/deb/2san37ozd2fvt77msovho39ceep399b2.jpg"
+  },
+  {
+    "subject": "Кабардино-Балкарская Республика",
+    "leader": {
+      "family_name": "Тюбеев",
+      "first_name": "Мурат",
+      "middle_name": "Абдуллахович"
+    },
+    "contact": "kabardino-balkaria@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/8dc/sc4x0hjgyeddcdphm8p7epwmdu41ug88.jpg"
+  },
+  {
+    "subject": "Карачаево-Черкесская Республика",
+    "leader": {
+      "family_name": "Андропов",
+      "first_name": "Константин",
+      "middle_name": "Сергеевич"
+    },
+    "contact": "karachay-cherkessia@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/29f/24cy7il3hdkv6jxwiw6opovqb7lsa9xm.jpg"
+  },
+  {
+    "subject": "Республика Северная Осетия - Алания",
+    "leader": {
+      "family_name": "Нартиков",
+      "first_name": "Александр",
+      "middle_name": "Георгиевич"
+    },
+    "contact": "ossetia-alania@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/d4a/iwxdq9zsybtbl25qmq0o8pp4xgyjwtp1.jpg"
+  },
+  {
+    "subject": "Ставропольский край",
+    "leader": {
+      "family_name": "Пижевский",
+      "first_name": "Дмитрий",
+      "middle_name": "Евгеньевич"
+    },
+    "contact": "stavropol@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/de6/hsaz5w09zoycm2wt27p1p35ex315c8cf.jpg"
+  },
+  {
+    "subject": "Чеченская Республика",
+    "leader": {
+      "family_name": "Саидов",
+      "first_name": "Зубайр",
+      "middle_name": "Ахмедович"
+    },
+    "contact": "chechnya@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/bd2/fl839rfcspmfktt7zi5k246862xta7an.jpg"
+  },
+  {
+    "subject": "Донецкая Народная Республика",
+    "leader": {
+      "family_name": "Станков",
+      "first_name": "Игорь",
+      "middle_name": "Валентинович"
+    },
+    "contact": "fsp-dnr@mail.ru",
+    "image_url": "https://fsp-russia.com/upload/iblock/7bd/h5wievsauq2wywbz428cw4hjn9zf84bj.jpg"
+  },
+  {
+    "subject": "Луганская Народная Республика",
+    "leader": {
+      "family_name": "Мальцева-Светличная",
+      "first_name": "Ольга",
+      "middle_name": "Валерьевна"
+    },
+    "contact": "fsp_lnr@mail.ru сайт: www.fsp-lnr.ru",
+    "image_url": "https://fsp-russia.com/upload/iblock/584/yawii7yzdof959n9lef7oe99ud5g6qow.jpg"
+  },
+  {
+    "subject": "Запорожская область",
+    "leader": {
+      "family_name": "Букреев",
+      "first_name": "Дмитрий",
+      "middle_name": null
+    },
+    "contact": "directum@fsp-zo.ru",
+    "image_url": "https://fsp-russia.com/upload/iblock/043/56ww5rnxbpczl4fgsr51vl31oqw9r8of.jpg"
+  },
+  {
+    "subject": "Херсонская область",
+    "leader": {
+      "family_name": null,
+      "first_name": null,
+      "middle_name": null
+    },
+    "contact": "kherson@fsp-russia.com",
+    "image_url": "https://fsp-russia.com/upload/iblock/9d4/amc3vbsl5i82sx7labf4j6healv3f9ku.jpg"
+  }
+]

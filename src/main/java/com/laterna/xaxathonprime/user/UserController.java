@@ -1,5 +1,6 @@
 package com.laterna.xaxathonprime.user;
 
+import com.laterna.xaxathonprime.user.dto.CreateUserDto;
 import com.laterna.xaxathonprime.user.dto.UpdateUserDto;
 import com.laterna.xaxathonprime.user.dto.UserDto;
 import lombok.RequiredArgsConstructor;
@@ -33,9 +34,20 @@ public class UserController {
         return ResponseEntity.ok(userService.getCurrentUser());
     }
 
+    @PostMapping("/region-admin")
+    public ResponseEntity<UserDto> createRegionAdmin(@RequestBody CreateUserDto createUserDto) {
+        return ResponseEntity.ok(userService.createRegionAdmin(createUserDto));
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<UserDto> updateUser(@RequestBody UpdateUserDto updateUserDto, @PathVariable Long id) {
         return ResponseEntity.ok(userService.updateUser(id, updateUserDto));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

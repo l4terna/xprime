@@ -164,4 +164,42 @@ public class UserService {
         return userRepository.findByNameContaining(search, searchPattern, pageable)
                 .map(userMapper::toDto);
     }
+
+    @Transactional
+    public void deleteUser(Long id) {
+        User userToDelete = userRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("User with id " + id + " not found"));
+
+        User currentUser = userMapper.toEntity(userContext.getCurrentUser());
+
+        if (!currentUser.getId().equals(id)) {
+            validateUserEditPermissions(currentUser, userToDelete);
+        }
+
+        userRepository.delete(userToDelete);
+    }
+
+    @Transactional
+    public UserDto createRegionAdmin(CreateUserDto createUserDto) {
+        if (userRepository.existsByEmail(createUserDto.email())) {
+            throw new UserAlreadyExistsException("User with email " + createUserDto.email() + " already exists");
+        }
+
+        RoleDto roleDto = roleService.findByName(RoleType.REGION_ADMIN.toString());
+
+        User user = User.builder()
+                .firstname(createUserDto.firstname())
+                .patronymic(createUserDto.patronymic())
+                .role(Role.builder().id(roleDto.id()).name(roleDto.name()).build())
+                .lastname(createUserDto.lastname())
+                .email(createUserDto.email())
+                .password(passwordEncoder.encode(createUserDto.password()))
+                .build();
+
+        UserDto savedUser = userMapper.toDto(userRepository.save(user));
+
+        verificationManagementService.handleUserCreation(savedUser);
+
+        return savedUser;
+    }
 }
