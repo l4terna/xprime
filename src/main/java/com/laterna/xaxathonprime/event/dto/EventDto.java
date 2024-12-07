@@ -1,8 +1,8 @@
 package com.laterna.xaxathonprime.event.dto;
 
 import com.laterna.xaxathonprime.discipline.Discipline;
-import com.laterna.xaxathonprime.eventrequest.enumeration.EventRequestStatus;
-import com.laterna.xaxathonprime.region.dto.RegionDto;
+import com.laterna.xaxathonprime.eventprotocol.dto.EventProtocolDto;
+import com.laterna.xaxathonprime.region.dto.RegionExcludedUserDto;
 
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -18,5 +18,6 @@ public record EventDto (
         LocalDateTime startDate,
         LocalDateTime endDate,
         Integer maxParticipants,
-        RegionDto region
+        RegionExcludedUserDto region,
+        EventProtocolDto eventProtocol
 ) {}

@@ -4,7 +4,6 @@ import com.laterna.xaxathonprime.eventbase.EventBaseMapper;
 import com.laterna.xaxathonprime.eventbase.EventBaseService;
 import com.laterna.xaxathonprime.eventbase.dto.EventBaseDto;
 import com.laterna.xaxathonprime.eventprotocol.dto.EventProtocolDto;
-import com.laterna.xaxathonprime.region.Region;
 import com.laterna.xaxathonprime.region.RegionMapper;
 import com.laterna.xaxathonprime.region.RegionService;
 import com.laterna.xaxathonprime.region.dto.RegionDto;
@@ -33,18 +32,16 @@ public class EventProtocolService {
     private final EventBaseMapper eventBaseMapper;
     private final RegionService regionService;
     private final RegionMapper regionMapper;
+    private final EventProtocolMapper eventProtocolMapper;
 
     private static final String UPLOAD_DIR = "uploads";
 
     @Transactional
     public EventProtocolDto uploadProtocol(Long eventBaseId, Long regionId, MultipartFile file) {
-        // Проверяем существование предыдущего протокола
         eventProtocolRepository.findByEventBaseIdAndRegionId(eventBaseId, regionId)
                 .ifPresent(existingProtocol -> {
                     try {
-                        // Удаляем старый файл
                         Files.deleteIfExists(Paths.get(existingProtocol.getFilePath()));
-                        // Удаляем запись из БД
                         eventProtocolRepository.delete(existingProtocol);
                     } catch (IOException e) {
                         throw new RuntimeException("Failed to delete existing file", e);
@@ -55,20 +52,16 @@ public class EventProtocolService {
         RegionDto region = regionService.findById(regionId);
 
         try {
-            // Create uploads directory if it doesn't exist
             Path uploadPath = Paths.get(UPLOAD_DIR);
             if (!Files.exists(uploadPath)) {
                 Files.createDirectories(uploadPath);
             }
 
-            // Generate unique filename
             String storedFileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
             Path filePath = uploadPath.resolve(storedFileName);
 
-            // Save file to disk
             Files.write(filePath, file.getBytes());
 
-            // Create and save protocol entity
             EventProtocol protocol = EventProtocol.builder()
                     .originalFileName(file.getOriginalFilename())
                     .storedFileName(storedFileName)
@@ -81,16 +74,7 @@ public class EventProtocolService {
 
             protocol = eventProtocolRepository.save(protocol);
 
-            // Return DTO
-            return new EventProtocolDto(
-                    protocol.getId(),
-                    protocol.getOriginalFileName(),
-                    protocol.getContentType(),
-                    protocol.getFileSize(),
-                    protocol.getCreatedAt(),
-                    protocol.getEventBase().getId(),
-                    protocol.getRegion().getId()
-            );
+            return eventProtocolMapper.toDto(protocol);
         } catch (IOException e) {
             throw new RuntimeException("Failed to store file", e);
         }
@@ -119,11 +103,9 @@ public class EventProtocolService {
                 .orElseThrow(() -> new EntityNotFoundException("Protocol not found for eventBase: " + eventBaseId + " and region: " + regionId));
 
         try {
-            // Delete file from disk
             Path filePath = Paths.get(protocol.getFilePath());
             Files.deleteIfExists(filePath);
 
-            // Delete record from database
             eventProtocolRepository.delete(protocol);
         } catch (IOException e) {
             throw new RuntimeException("Failed to delete file", e);

@@ -2,6 +2,7 @@ package com.laterna.xaxathonprime.eventbase;
 
 import com.laterna.xaxathonprime._shared.model.BaseEntity;
 import com.laterna.xaxathonprime.discipline.Discipline;
+import com.laterna.xaxathonprime.eventprotocol.EventProtocol;
 import com.laterna.xaxathonprime.region.Region;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -47,4 +48,8 @@ public class EventBase extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "discipline_id")
     )
     private Set<Discipline> disciplines = new HashSet<>();
+
+    @OneToOne(mappedBy = "eventBase")
+    @JoinColumn(name = "event_protocol_id")
+    private EventProtocol eventProtocol;
 }

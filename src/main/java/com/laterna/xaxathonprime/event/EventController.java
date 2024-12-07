@@ -17,7 +17,6 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class EventController {
     private final EventService eventService;
-    private final EventBaseService eventBaseService;
 
     @GetMapping
     public ResponseEntity<Page<EventBaseDto>> getApprovedEvents(

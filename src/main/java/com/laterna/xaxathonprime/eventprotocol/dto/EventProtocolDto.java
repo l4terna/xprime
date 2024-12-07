@@ -4,10 +4,9 @@ import java.time.LocalDateTime;
 
 public record EventProtocolDto(
         Long id,
-        String fileName,
+        String originalFileName,
+        String storedFileName,
         String contentType,
         Long fileSize,
-        LocalDateTime createdAt,
-        Long eventBaseId,
-        Long regionId
+        LocalDateTime createdAt
 ) {}

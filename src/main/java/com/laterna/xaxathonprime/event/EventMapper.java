@@ -19,6 +19,7 @@ public interface EventMapper {
     @Mapping(target = "endDate", source = "base.endDate")
     @Mapping(target = "maxParticipants", source = "base.maxParticipants")
     @Mapping(target = "region", source = "base.region")
+    @Mapping(target = "eventProtocol", source = "base.eventProtocol")
     EventDto toDto(Event event);
 
     EventRequest toEntity(EventRequestDto eventRequestDto);

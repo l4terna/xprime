@@ -12,6 +12,8 @@ import com.laterna.xaxathonprime.user.dto.UserDto;
 import com.laterna.xaxathonprime.user.exception.UserAlreadyExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -154,5 +156,12 @@ public class UserService {
     @Transactional(readOnly = true)
     public UserDto getCurrentUser() {
         return userContext.getCurrentUser();
+    }
+
+    @Transactional(readOnly = true)
+    public Page<UserDto> findUsers(Pageable pageable, String search) {
+        String searchPattern = search != null ? "%" + search + "%" : null;
+        return userRepository.findByNameContaining(search, searchPattern, pageable)
+                .map(userMapper::toDto);
     }
 }
