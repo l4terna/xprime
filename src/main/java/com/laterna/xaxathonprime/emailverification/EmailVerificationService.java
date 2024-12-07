@@ -1,5 +1,6 @@
 package com.laterna.xaxathonprime.emailverification;
 
+import com.laterna.xaxathonprime.emailverification.dto.ResetPasswordDto;
 import com.laterna.xaxathonprime.emailverification.dto.VerifyNewPasswordDto;
 import com.laterna.xaxathonprime.user.User;
 import com.laterna.xaxathonprime.user.UserService;
@@ -21,9 +22,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 public class EmailVerificationService {
-    @Value("${spring.application.base-url}")
-    private String baseUrl;
-
     private final UserService userService;
     private final VerificationTokenService tokenService;
     private final PasswordEncoder passwordEncoder;
@@ -47,15 +45,15 @@ public class EmailVerificationService {
     }
 
     @Async
-    public void sendPasswordResetEmail(String to) {
+    public void sendPasswordResetEmail(ResetPasswordDto resetPasswordDto) {
         try {
-            UserDto user = userService.findByEmail(to);
+            UserDto user = userService.findByEmail(resetPasswordDto.email());
             VerificationToken resetToken = tokenService.createToken(user);
 
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
-            helper.setTo(to);
+            helper.setTo(resetPasswordDto.email());
             helper.setSubject("Password Reset Request");
             helper.setText(buildPasswordResetEmailText(resetToken.getToken()), true);
 
@@ -71,10 +69,10 @@ public class EmailVerificationService {
             <body>
                 <h2>Email Verification</h2>
                 <p>Please click the link below to verify your email:</p>
-                <a href="%s/api/verify?token=%s">Verify Email</a>
+                <b>Your code: %s</b>
             </body>
         </html>
-        """, baseUrl, token);
+        """, token);
     }
 
     private String buildPasswordResetEmailText(String token) {
@@ -83,10 +81,10 @@ public class EmailVerificationService {
                 <body>
                     <h2>Password Reset</h2>
                     <p>Click the link below to reset your password:</p>
-                    <a href="%s/api/reset-password?token=%s">Reset Password</a>
+                    <b>Your code: %s</b>
                 </body>
             </html>
-            """, baseUrl, token);
+            """, token);
     }
 
     public void verifyEmail(String token) {

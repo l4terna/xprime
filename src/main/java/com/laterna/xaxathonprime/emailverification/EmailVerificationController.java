@@ -1,5 +1,6 @@
 package com.laterna.xaxathonprime.emailverification;
 
+import com.laterna.xaxathonprime.emailverification.dto.ResetPasswordDto;
 import com.laterna.xaxathonprime.emailverification.dto.VerifyNewPasswordDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -24,8 +25,8 @@ public class EmailVerificationController {
     }
 
     @PostMapping("/reset-password")
-    public ResponseEntity<?> requestPasswordReset(@RequestParam String email) {
-        emailVerificationService.sendPasswordResetEmail(email);
+    public ResponseEntity<?> requestPasswordReset(@RequestBody ResetPasswordDto resetPasswordDto) {
+        emailVerificationService.sendPasswordResetEmail(resetPasswordDto);
         return ResponseEntity.ok().build();
     }
 

@@ -4,6 +4,7 @@ import com.laterna.xaxathonprime.discipline.dto.DisciplineDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -18,5 +19,9 @@ public class DisciplineService {
                 .stream()
                 .map(disciplineMapper::toDto)
                 .collect(Collectors.toSet());
+    }
+
+    public List<Discipline> getDisciplines() {
+        return disciplineRepository.findAll();
     }
 }

@@ -1,10 +1,8 @@
 package com.laterna.xaxathonprime.user;
 
 import com.laterna.xaxathonprime._shared.context.UserContext;
-import com.laterna.xaxathonprime.emailverification.EmailVerificationService;
 import com.laterna.xaxathonprime.emailverification.VerificationManagementService;
 import com.laterna.xaxathonprime.role.Role;
-import com.laterna.xaxathonprime.role.RoleMapper;
 import com.laterna.xaxathonprime.role.RoleService;
 import com.laterna.xaxathonprime.role.dto.RoleDto;
 import com.laterna.xaxathonprime.role.enumeration.RoleType;
@@ -151,5 +149,10 @@ public class UserService {
         return userRepository.findByEmail(email)
                 .map(userMapper::toDto)
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
+    }
+
+    @Transactional(readOnly = true)
+    public UserDto getCurrentUser() {
+        return userContext.getCurrentUser();
     }
 }
