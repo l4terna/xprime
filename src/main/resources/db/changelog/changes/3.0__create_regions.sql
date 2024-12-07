@@ -17,3 +17,7 @@ ALTER TABLE regions ADD COLUMN description TEXT;
 -- changeset laterna:3
 ALTER TABLE regions ADD COLUMN image_url VARCHAR(255);
 --rollback ALTER TABLE regions DROP COLUMN image_url;
+
+-- changeset laterna:4
+ALTER TABLE regions ADD COLUMN federal_district VARCHAR(255);
+--rollback ALTER TABLE regions DROP COLUMN federal_district;

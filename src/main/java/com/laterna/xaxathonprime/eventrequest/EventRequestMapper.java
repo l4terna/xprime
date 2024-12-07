@@ -42,6 +42,7 @@ public interface EventRequestMapper {
                 region.getDescription(),
                 region.getCreatedAt(),
                 region.getImageUrl(),
+                region.getFederalDistrict(),
                 mapUserWithoutRegionReference(region.getUser())
         );
     }

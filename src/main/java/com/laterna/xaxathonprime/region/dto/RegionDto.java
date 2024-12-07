@@ -12,6 +12,7 @@ public record RegionDto (
     String contactEmail,
     LocalDateTime createdAt,
     String imageUrl,
+    String federalDistrict,
     UserDto user
 ) {}
 

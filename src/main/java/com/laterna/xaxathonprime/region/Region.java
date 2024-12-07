@@ -25,6 +25,7 @@ public class Region extends BaseEntity {
     private String contactEmail;
     private String description;
     private String imageUrl;
+    private String federalDistrict;
 
     @CreatedDate
     private LocalDateTime createdAt;

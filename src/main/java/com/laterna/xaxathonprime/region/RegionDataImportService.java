@@ -6,19 +6,15 @@ import com.laterna.xaxathonprime.role.Role;
 import com.laterna.xaxathonprime.role.RoleRepository;
 import com.laterna.xaxathonprime.user.User;
 import com.laterna.xaxathonprime.user.UserService;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -38,6 +34,7 @@ public class RegionDataImportService {
         private Leader leader;
         private String contact;
         private String image_url;
+        private String federal_district;
 
         @Data
         private static class Leader {
@@ -50,7 +47,6 @@ public class RegionDataImportService {
     @Transactional
     public void importData() {
         try {
-            // Читаем JSON файл из ресурсов
             var inputStream = getClass().getResourceAsStream("/regions_data.json");
             if (inputStream == null) {
                 throw new RuntimeException("Could not find regions_data.json in resources");
@@ -63,7 +59,6 @@ public class RegionDataImportService {
             for (RegionData regionData : regionsData) {
                 User user = null;
 
-                // Создаем пользователя только если есть данные о руководителе
                 if (regionData.getLeader().getFamily_name() != null && regionData.getLeader().getFirst_name() != null) {
                     String email = generateEmail(regionData.getLeader().getFirst_name(), regionData.getLeader().getFamily_name());
 
@@ -90,6 +85,7 @@ public class RegionDataImportService {
                         .name(regionData.getSubject())
                         .contactEmail(regionData.getContact())
                         .imageUrl(regionData.getImage_url())
+                        .federalDistrict(regionData.getFederal_district()) // Added federal district
                         .user(user)
                         .build();
 
@@ -98,7 +94,9 @@ public class RegionDataImportService {
 
             log.info("Data import completed successfully. Imported {} regions", regionsData.length);
             for (RegionData data : regionsData) {
-                log.debug("Imported region: {}", data.getSubject());
+                log.debug("Imported region: {} (Federal District: {})",
+                        data.getSubject(),
+                        data.getFederal_district() != null ? data.getFederal_district() : "Not specified");
             }
         } catch (IOException e) {
             log.error("Error importing data", e);
