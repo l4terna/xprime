@@ -24,20 +24,17 @@ public class NotificationController {
     }
 
     @PatchMapping("/{id}/mark-read")
-    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<NotificationDto> markAsRead(@PathVariable Long id) {
         return ResponseEntity.ok(notificationService.markAsRead(id));
     }
 
     @PatchMapping("/mark-all-read")
-    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Void> markAllAsRead() {
         notificationService.markAllAsRead();
         return ResponseEntity.ok().build();
     }
 
     @GetMapping("/unread-count")
-    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Long> getUnreadCount() {
         return ResponseEntity.ok(notificationService.getUnreadCount());
     }

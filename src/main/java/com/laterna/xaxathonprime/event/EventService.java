@@ -84,4 +84,7 @@ public class EventService {
     }
 
 
+    public List<Event> findAll(Specification<Event> spec) {
+        return eventRepository.findAll(spec);
+    }
 }

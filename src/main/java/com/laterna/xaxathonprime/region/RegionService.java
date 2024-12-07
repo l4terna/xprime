@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -40,6 +41,10 @@ public class RegionService {
         }
 
         return regionsPage.map(regionMapper::toDto);
+    }
+
+    public List<RegionDto> findAll() {
+        return regionRepository.findAll().stream().map(regionMapper::toDto).toList();
     }
 
     public RegionDto findById(Long id) {
