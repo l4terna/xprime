@@ -20,5 +20,6 @@ public record EventRequestDto (
         LocalDateTime startDate,
         LocalDateTime endDate,
         Integer maxParticipants,
-        RegionDto region
+        RegionDto region,
+        Long base_id
 ){}

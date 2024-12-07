@@ -1,8 +1,10 @@
 package com.laterna.xaxathonprime.event;
 
+import com.laterna.xaxathonprime.discipline.Discipline;
 import com.laterna.xaxathonprime.event.dto.CreateEventDto;
 import com.laterna.xaxathonprime.event.dto.EventBaseFilter;
 import com.laterna.xaxathonprime.event.dto.EventDto;
+import com.laterna.xaxathonprime.event.dto.UpdateEventDto;
 import com.laterna.xaxathonprime.eventbase.EventBase;
 import com.laterna.xaxathonprime.eventbase.EventBaseMapper;
 import com.laterna.xaxathonprime.eventbase.dto.EventBaseDto;
@@ -17,6 +19,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import jakarta.persistence.criteria.Predicate;
 
 @Service
@@ -77,4 +82,6 @@ public class EventService {
 
         return eventMapper.toDto(eventRepository.save(event));
     }
+
+
 }

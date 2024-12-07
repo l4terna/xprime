@@ -1,8 +1,8 @@
 package com.laterna.xaxathonprime.eventrequest;
 
-import com.laterna.xaxathonprime.event.EventMapper;
 import com.laterna.xaxathonprime.event.EventService;
 import com.laterna.xaxathonprime.event.dto.CreateEventDto;
+import com.laterna.xaxathonprime.eventbase.EventBase;
 import com.laterna.xaxathonprime.eventbase.EventBaseMapper;
 import com.laterna.xaxathonprime.eventbase.EventBaseService;
 import com.laterna.xaxathonprime.eventbase.dto.EventBaseDto;
@@ -10,13 +10,16 @@ import com.laterna.xaxathonprime.eventrequest.dto.CreateEventRequestDto;
 import com.laterna.xaxathonprime.eventrequest.dto.EventRequestDto;
 import com.laterna.xaxathonprime.eventrequest.dto.RejectEventRequestDto;
 import com.laterna.xaxathonprime.eventrequest.enumeration.EventRequestStatus;
+import com.laterna.xaxathonprime.notification.event.EventApprovedEvent;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 
 
 @Service
@@ -27,7 +30,7 @@ public class EventRequestService {
     private final EventBaseService eventBaseService;
     private final EventBaseMapper eventBaseMapper;
     private final EventService eventService;
-    private final EventMapper eventMapper;
+    private final ApplicationEventPublisher eventPublisher;
 
     @Transactional
     public EventRequestDto createRequest(CreateEventRequestDto createRequestDto) {
@@ -75,8 +78,14 @@ public class EventRequestService {
                 .orElseThrow(() -> new RuntimeException("Event request not found"));
 
         request.setStatus(EventRequestStatus.APPROVED);
-
         eventService.createEvent(new CreateEventDto(request));
+
+        eventPublisher.publishEvent(new EventApprovedEvent(
+                request.getId(),
+                request.getBase().getName(),
+                request.getBase().getRegion().getUser() != null ? request.getBase().getRegion().getUser().getId() : null,
+                LocalDateTime.now()
+        ));
 
         return eventRequestMapper.toDto(eventRequestRepository.save(request));
     }
