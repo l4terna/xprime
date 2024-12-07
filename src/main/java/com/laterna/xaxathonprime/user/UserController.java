@@ -21,11 +21,13 @@ public class UserController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "30") int size,
             @RequestParam(defaultValue = "desc") String direction,
-            @RequestParam(required = false) String search
+            @RequestParam(required = false) String search,
+            @RequestParam(required = false) String excludeRole,
+            @RequestParam(required = false) String includeOnlyRole
     ) {
         Sort sort = Sort.by(Sort.Direction.fromString(direction), "id");
         PageRequest pageRequest = PageRequest.of(page, size, sort);
-        return ResponseEntity.ok(userService.findUsers(pageRequest, search));
+        return ResponseEntity.ok(userService.findUsers(pageRequest, search, excludeRole, includeOnlyRole));
     }
 
 

@@ -32,4 +32,34 @@ interface UserRepository extends JpaRepository<User, Long> {
     Page<User> findByNameContaining(@Param("search") String search,
                                     @Param("searchPattern") String searchPattern,
                                     Pageable pageable);
+
+    @Query("""
+            SELECT u FROM User u 
+            WHERE (:search IS NULL OR 
+                  LOWER(u.firstname) LIKE LOWER(:searchPattern) OR 
+                  LOWER(u.lastname) LIKE LOWER(:searchPattern) OR 
+                  LOWER(u.email) LIKE LOWER(:searchPattern)) AND 
+                  u.role.name != :excludeRole
+            """)
+    Page<User> findByNameContainingExcludeRole(
+            @Param("search") String search,
+            @Param("searchPattern") String searchPattern,
+            @Param("excludeRole") String excludeRole,
+            Pageable pageable
+    );
+
+    @Query("""
+            SELECT u FROM User u 
+            WHERE (:search IS NULL OR 
+                  LOWER(u.firstname) LIKE LOWER(:searchPattern) OR 
+                  LOWER(u.lastname) LIKE LOWER(:searchPattern) OR 
+                  LOWER(u.email) LIKE LOWER(:searchPattern)) AND 
+                  u.role.name = :roleType
+            """)
+    Page<User> findByNameContainingAndRole(
+            @Param("search") String search,
+            @Param("searchPattern") String searchPattern,
+            @Param("roleType") String roleType,
+            Pageable pageable
+    );
 }

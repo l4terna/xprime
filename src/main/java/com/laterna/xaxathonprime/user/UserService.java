@@ -159,10 +159,46 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
-    public Page<UserDto> findUsers(Pageable pageable, String search) {
+    public Page<UserDto> findUsers(Pageable pageable, String search, String excludeRole, String includeOnlyRole) {
         String searchPattern = search != null ? "%" + search + "%" : null;
-        return userRepository.findByNameContaining(search, searchPattern, pageable)
-                .map(userMapper::toDto);
+
+        // Validate and convert role strings to RoleType if provided
+        RoleType excludeRoleType = null;
+        RoleType includeOnlyRoleType = null;
+
+        try {
+            if (excludeRole != null) {
+                excludeRoleType = RoleType.valueOf(excludeRole.toUpperCase());
+            }
+            if (includeOnlyRole != null) {
+                includeOnlyRoleType = RoleType.valueOf(includeOnlyRole.toUpperCase());
+            }
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Invalid role type provided");
+        }
+
+        // Call the appropriate repository method
+        if (includeOnlyRoleType != null) {
+            return userRepository.findByNameContainingAndRole(
+                    search,
+                    searchPattern,
+                    includeOnlyRoleType.toString(),
+                    pageable
+            ).map(userMapper::toDto);
+        } else if (excludeRoleType != null) {
+            return userRepository.findByNameContainingExcludeRole(
+                    search,
+                    searchPattern,
+                    excludeRoleType.toString(),
+                    pageable
+            ).map(userMapper::toDto);
+        } else {
+            return userRepository.findByNameContaining(
+                    search,
+                    searchPattern,
+                    pageable
+            ).map(userMapper::toDto);
+        }
     }
 
     @Transactional
