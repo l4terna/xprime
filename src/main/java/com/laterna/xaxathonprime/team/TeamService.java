@@ -5,15 +5,19 @@ import com.laterna.xaxathonprime.team.dto.AddTeamMemberDto;
 import com.laterna.xaxathonprime.team.dto.CreateTeamDto;
 import com.laterna.xaxathonprime.team.dto.TeamDto;
 import com.laterna.xaxathonprime.team.dto.UpdateTeamDto;
+import com.laterna.xaxathonprime.user.User;
 import com.laterna.xaxathonprime.user.UserMapper;
 import com.laterna.xaxathonprime.user.UserService;
 import com.laterna.xaxathonprime.user.dto.UserDto;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,8 +43,6 @@ public class TeamService {
                 .description(request.description())
                 .region(regionMapper.toEntity(currentUser.region()))
                 .build();
-
-        team.getUsers().add(userMapper.toEntity(currentUser));
 
         return teamMapper.toDto(teamRepository.save(team));
     }
@@ -70,31 +72,37 @@ public class TeamService {
     }
 
     @Transactional(readOnly = true)
-    public List<TeamDto> getTeams(Long regionId) {
-        List<Team> teams;
+    public Page<TeamDto> getTeams(Long regionId, Pageable pageable) {
+        Page<Team> teams;
         if (regionId != null) {
-            teams = teamRepository.findByRegionId(regionId);
+            teams = teamRepository.findByRegionId(regionId, pageable);
         } else {
-            teams = teamRepository.findAll();
+            teams = teamRepository.findAll(pageable);
         }
-        return teams.stream()
-                .map(teamMapper::toDto)
-                .collect(Collectors.toList());
+        return teams.map(teamMapper::toDto);
     }
 
+    @Transactional
     public TeamDto addMember(Long teamId, AddTeamMemberDto request) {
         UserDto currentUser = userService.getCurrentUser();
         Team team = teamRepository.findById(teamId)
                 .orElseThrow(() -> new EntityNotFoundException("Team not found"));
 
-        if (!currentUser.region().id().equals(team.getRegion().getId())) {
+        if (currentUser.region() == null) {
+            throw new IllegalStateException("Current user must be assigned to a region");
+        }
+
+
+        Long currentUserRegionId = currentUser.region().id();
+        Long teamRegionId = team.getRegion().getId();
+        if (!currentUserRegionId.equals(teamRegionId)) {
             throw new AccessDeniedException("You can only manage teams in your region");
         }
 
         UserDto userToAdd = userService.findById(request.userId());
 
-        if (!team.getRegion().getId().equals(userToAdd.region().id())) {
-            throw new IllegalArgumentException("Can only add users from the same region");
+        if (team.getUsers().stream().anyMatch(user -> user.getId().equals(userToAdd.id()))) {
+            throw new IllegalStateException("User is already a member of this team");
         }
 
         team.getUsers().add(userMapper.toEntity(userToAdd));
@@ -102,6 +110,7 @@ public class TeamService {
         return teamMapper.toDto(teamRepository.save(team));
     }
 
+    @Transactional
     public TeamDto removeMember(Long teamId, Long userId) {
         UserDto currentUser = userService.getCurrentUser();
         Team team = teamRepository.findById(teamId)
@@ -111,14 +120,29 @@ public class TeamService {
             throw new AccessDeniedException("You can only manage teams in your region");
         }
 
-        UserDto userToRemove = userService.findById(userId);
+        User userToDelete = team.getUsers().stream()
+                .filter(user -> user.getId().equals(userId))
+                .findFirst()
+                .orElseThrow(() -> new EntityNotFoundException("User is not a member of this team"));
 
-        if (team.getUsers().size() <= 1) {
-            throw new IllegalStateException("Cannot remove the last team member");
-        }
-
-        team.getUsers().remove(userToRemove);
+        team.getUsers().remove(userToDelete);
 
         return teamMapper.toDto(teamRepository.save(team));
+    }
+
+    @Transactional
+    public void deleteTeam(Long teamId) {
+        UserDto currentUser = userService.getCurrentUser();
+        Team team = teamRepository.findById(teamId)
+                .orElseThrow(() -> new EntityNotFoundException("Team not found"));
+
+        if (!currentUser.region().id().equals(team.getRegion().getId())) {
+            throw new AccessDeniedException("You can only delete teams in your region");
+        }
+
+        team.setUsers(new HashSet<>());
+        teamRepository.save(team);
+
+        teamRepository.delete(team);
     }
 }

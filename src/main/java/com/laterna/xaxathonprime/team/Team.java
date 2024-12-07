@@ -47,6 +47,13 @@ public class Team extends BaseEntity {
     )
     private Set<User> users = new HashSet<>();
 
+    public Set<User> getUsers() {
+        if (this.users == null) {
+            this.users = new HashSet<>();
+        }
+        return this.users;
+    }
+
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();

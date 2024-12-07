@@ -43,6 +43,8 @@ public class User extends BaseEntity {
     private LocalDateTime createdAt;
 
     @OneToOne(mappedBy = "user")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private Region region;
 
     @Column(nullable = false)

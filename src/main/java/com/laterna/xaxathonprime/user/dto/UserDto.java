@@ -1,6 +1,5 @@
 package com.laterna.xaxathonprime.user.dto;
 
-import com.laterna.xaxathonprime.region.dto.RegionDto;
 import com.laterna.xaxathonprime.region.dto.RegionExcludedUserDto;
 import com.laterna.xaxathonprime.role.dto.RoleDto;
 

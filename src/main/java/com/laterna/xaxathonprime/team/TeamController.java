@@ -1,10 +1,14 @@
 package com.laterna.xaxathonprime.team;
 
+import com.laterna.xaxathonprime.eventrequest.dto.EventRequestDto;
 import com.laterna.xaxathonprime.team.dto.AddTeamMemberDto;
 import com.laterna.xaxathonprime.team.dto.CreateTeamDto;
 import com.laterna.xaxathonprime.team.dto.TeamDto;
 import com.laterna.xaxathonprime.team.dto.UpdateTeamDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,9 +38,21 @@ public class TeamController {
         return ResponseEntity.ok(teamService.getTeam(teamId));
     }
 
+    @DeleteMapping("/{teamId}")
+    public void deleteTeam(@PathVariable Long teamId) {
+        teamService.deleteTeam(teamId);
+    }
+
     @GetMapping
-    public ResponseEntity<List<TeamDto>> getTeams(@RequestParam(required = false) Long regionId) {
-        return ResponseEntity.ok(teamService.getTeams(regionId));
+    public ResponseEntity<Page<TeamDto>> getTeams(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "30") int size,
+            @RequestParam(defaultValue = "desc") String direction,
+            @RequestParam(required = false) Long regionId) {
+        Sort sort = Sort.by(Sort.Direction.fromString(direction), "id");
+        PageRequest pageRequest = PageRequest.of(page, size, sort);
+        Page<TeamDto> teams = teamService.getTeams(regionId, pageRequest);
+        return ResponseEntity.ok(teams);
     }
 
     @PostMapping("/{teamId}/members")
