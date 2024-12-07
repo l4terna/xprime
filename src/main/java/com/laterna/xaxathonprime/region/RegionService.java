@@ -54,10 +54,6 @@ public class RegionService {
 
     @Transactional
     public RegionDto updateRegion(Long id, UpdateRegionDto regionDto) {
-        if(!userContext.getCurrentUser().role().name().equals(RoleType.FSP_ADMIN.name())) {
-            throw new AccessDeniedException("You do not have permission to update this region");
-        }
-
         Region region = regionRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Region not found with id: " + id));
 
