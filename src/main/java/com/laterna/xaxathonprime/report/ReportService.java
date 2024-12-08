@@ -6,6 +6,8 @@ import com.laterna.xaxathonprime.eventbase.EventBase;
 import com.laterna.xaxathonprime.region.RegionService;
 import com.laterna.xaxathonprime.region.dto.RegionDto;
 import com.laterna.xaxathonprime.report.dto.*;
+import com.laterna.xaxathonprime.team.TeamService;
+import com.laterna.xaxathonprime.user.UserService;
 import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.Predicate;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +15,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -23,42 +26,105 @@ import java.util.stream.Collectors;
 public class ReportService {
     private final EventService eventService;
     private final RegionService regionService;
+    private final TeamService teamService;
+    private final UserService userService;
 
     @Transactional(readOnly = true)
-    public AllRegionsReportDto generateAllRegionsReport(AllRegionsReportFilter filter) {
-        // Получаем все регионы
-        List<RegionDto> regions = regionService.findAll();
+    public ReportDto generateReport(RegionReportFilter filter) {
+        List<RegionDto> regions = filter.regionId() != null ?
+                List.of(regionService.findById(filter.regionId())) :
+                regionService.findAll();
 
-        // Получаем все события с применением фильтров
-        Specification<Event> spec = createSpecification(filter);
-        List<Event> allEvents = eventService.findAll(spec);
+        List<Event> events = eventService.findAll(createSpecification(filter));
 
-        // Группируем события по регионам
-        Map<Long, List<Event>> eventsByRegion = allEvents.stream()
-                .collect(Collectors.groupingBy(event -> event.getBase().getRegion().getId()));
+        LocalDateTime now = LocalDateTime.now();
+        int currentEventsCount = (int) events.stream()
+                .filter(event -> isEventCurrent(event, now))
+                .count();
 
-        // Формируем отчеты по каждому региону
-        List<ReportDto> regionReports = regions.stream()
-                .map(region -> {
-                    List<Event> regionEvents = eventsByRegion.getOrDefault(region.id(), new ArrayList<>());
-                    return createRegionReport(region, regionEvents);
-                })
-                .toList();
+        int totalTeams = regions.stream()
+                .mapToInt(region -> teamService.countTeamsByRegionId(region.id()))
+                .sum();
 
-        // Формируем общий отчет
-        return new AllRegionsReportDto(
-                regions.size(),
-                allEvents.size(),
-                calculateTotalTeams(allEvents),
-                calculateTotalParticipants(allEvents),
-                regionReports
+        int totalParticipants = regions.stream()
+                .mapToInt(region -> teamService.countParticipantsByRegionId(region.id()))
+                .sum();
+
+        return new ReportDto(
+                filter.regionId() != null ? regions.getFirst().name() : null,
+                events.size(),
+                currentEventsCount,
+                totalTeams,
+                totalParticipants,
+                events.stream().map(this::mapToEventReport).toList(),
+                filter.regionId() != null ? null : generateRegionEventReports(regions),
+                regions.size()
         );
     }
 
-    private Specification<Event> createSpecification(AllRegionsReportFilter filter) {
+    private List<EventReportDto> generateRegionEventReports(List<RegionDto> regions) {
+        return regions.stream()
+                .flatMap(region -> {
+                    RegionReportFilter filter = new RegionReportFilter(region.id(), null, null, null, null, null);
+                    List<Event> regionEvents = eventService.findAll(createSpecification(filter));
+                    return regionEvents.stream().map(this::mapToEventReport);
+                })
+                .toList();
+    }
+
+    private EventReportDto mapToEventReport(Event event) {
+        EventBase base = event.getBase();
+        return new EventReportDto(
+                base.getName(),
+                base.getStartDate(),
+                base.getEndDate(),
+                base.getMaxParticipants(),
+                base.getLocation()
+        );
+    }
+
+
+
+    private boolean isEventCurrent(Event event, LocalDateTime now) {
+        LocalDateTime startDate = event.getBase().getStartDate();
+        LocalDateTime endDate = event.getBase().getEndDate();
+        return startDate != null && endDate != null &&
+                !now.isBefore(startDate) && !now.isAfter(endDate);
+    }
+
+    private List<ReportDto> generateRegionReports(List<RegionDto> regions) {
+        LocalDateTime now = LocalDateTime.now();
+        return regions.stream()
+                .map(region -> {
+                    RegionReportFilter filter = new RegionReportFilter(region.id(), null, null, null, null, null);
+                    List<Event> regionEvents = eventService.findAll(createSpecification(filter));
+
+                    int currentEvents = (int) regionEvents.stream()
+                            .filter(event -> isEventCurrent(event, now))
+                            .count();
+
+                    return new ReportDto(
+                            region.name(),
+                            regionEvents.size(),
+                            currentEvents,
+                            teamService.countTeamsByRegionId(region.id()),
+                            teamService.countParticipantsByRegionId(region.id()),
+                            regionEvents.stream().map(this::mapToEventReport).toList(),
+                            null,
+                            1
+                    );
+                })
+                .toList();
+    }
+
+    private Specification<Event> createSpecification(RegionReportFilter filter) {
         return (root, query, cb) -> {
             List<Predicate> predicates = new ArrayList<>();
             Join<Event, EventBase> baseJoin = root.join("base");
+
+            if (filter.regionId() != null) {
+                predicates.add(cb.equal(baseJoin.get("region").get("id"), filter.regionId()));
+            }
 
             if (filter.startDate() != null) {
                 predicates.add(cb.greaterThanOrEqualTo(baseJoin.get("startDate"), filter.startDate()));
@@ -87,46 +153,11 @@ public class ReportService {
         };
     }
 
-    private ReportDto createRegionReport(RegionDto region, List<Event> events) {
-        List<EventReportDto> eventReports = events.stream()
-                .map(this::mapToEventReport)
-                .toList();
-
-        return new ReportDto(
-                region.name(),
-                events.size(),
-                calculateTotalTeams(events),
-                calculateTotalParticipants(events),
-                eventReports
-        );
+    public long getCountOfTeams() {
+        return teamService.countAll();
     }
 
-    private EventReportDto mapToEventReport(Event event) {
-        EventBase base = event.getBase();
-        return new EventReportDto(
-                base.getName(),
-                base.getStartDate(),
-                base.getEndDate(),
-                base.getMaxParticipants(),
-                calculateTeamCount(event),
-                base.getLocation()
-        );
-    }
-
-    private int calculateTotalTeams(List<Event> events) {
-        return events.stream()
-                .mapToInt(this::calculateTeamCount)
-                .sum();
-    }
-
-    private int calculateTotalParticipants(List<Event> events) {
-        return events.stream()
-                .mapToInt(event -> event.getBase().getMaxParticipants())
-                .sum();
-    }
-
-    private int calculateTeamCount(Event event) {
-        // TODO: Имплементировать подсчет команд на основе вашей модели данных
-        return 0;
+    public long getCountOfUsers() {
+        return userService.countAll();
     }
 }

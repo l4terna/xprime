@@ -1,7 +1,7 @@
-package com.laterna.xaxathonprime.region;
+package com.laterna.xaxathonprime.regionnews;
 
 import com.laterna.xaxathonprime._shared.model.BaseEntity;
-import com.laterna.xaxathonprime.user.User;
+import com.laterna.xaxathonprime.region.Region;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -16,24 +16,25 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "regions")
+@Table(name = "region_news")
 @EntityListeners(AuditingEntityListener.class)
-public class Region extends BaseEntity {
+public class RegionNews extends BaseEntity {
+    
     @Column(nullable = false)
-    private String name;
-
-    private String contactEmail;
-    private String description;
-    private String imageUrl;
-    private String federalDistrict;
-
+    private String title;
+    
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String content;
+    
+    @Column(name = "preview_image_path")
+    private String previewImagePath;
+    
     @CreatedDate
     private LocalDateTime createdAt;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "region_id", nullable = false)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    private User user;
-
+    private Region region;
 }

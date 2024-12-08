@@ -27,3 +27,5 @@ databaseChangeLog:
       - file: db/changelog/changes/12.0__create_event_protocols.sql
   - include:
       - file: db/changelog/changes/13.0__create_region_applications.sql
+  - include:
+      - file: db/changelog/changes/14.0__create_region_news.sql

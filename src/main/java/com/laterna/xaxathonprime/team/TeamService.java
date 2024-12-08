@@ -18,8 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
-import java.util.List;
-import java.util.stream.Collectors;
+
 
 @Service
 @Transactional
@@ -144,5 +143,17 @@ public class TeamService {
         teamRepository.save(team);
 
         teamRepository.delete(team);
+    }
+
+    public int countTeamsByRegionId(Long id) {
+        return teamRepository.countTeamsByRegionId(id);
+    }
+
+    public int countParticipantsByRegionId(Long id) {
+        return teamRepository.countParticipantsByRegionId(id);
+    }
+
+    public long countAll() {
+        return teamRepository.count();
     }
 }

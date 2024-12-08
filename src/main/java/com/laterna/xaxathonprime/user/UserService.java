@@ -238,4 +238,8 @@ public class UserService {
 
         return savedUser;
     }
+
+    public long countAll() {
+        return userRepository.count();
+    }
 }
