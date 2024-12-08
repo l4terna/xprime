@@ -30,6 +30,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
     implementation 'org.springframework.boot:spring-boot-starter-mail'
+    implementation 'com.github.javafaker:javafaker:1.0.2'  exclude group: 'org.yaml', module: 'snakeyaml'
     implementation 'com.itextpdf:itext7-core:7.2.5'
     implementation 'com.itextpdf:layout:7.2.5'
     implementation 'io.jsonwebtoken:jjwt-api:0.12.6'

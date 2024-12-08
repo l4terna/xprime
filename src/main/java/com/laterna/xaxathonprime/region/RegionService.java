@@ -133,4 +133,12 @@ public class RegionService {
 
         return regionMapper.toDto(regionRepository.save(region));
     }
+
+    public long count() {
+        return regionRepository.count();
+    }
+
+    public RegionDto save(Region build) {
+        return regionMapper.toDto(regionRepository.save(build));
+    }
 }

@@ -10,6 +10,8 @@ databaseChangeLog:
   - include:
       - file: db/changelog/changes/4.0__create_disciplines.sql
   - include:
+      - file: db/changelog/changes/4.1__insert_disciplines.sql
+  - include:
       - file: db/changelog/changes/5.0__create_event_base.sql
   - include:
       - file: db/changelog/changes/6.0__create_event_requests.sql

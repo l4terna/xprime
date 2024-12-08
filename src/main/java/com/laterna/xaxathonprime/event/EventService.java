@@ -87,4 +87,8 @@ public class EventService {
     public List<Event> findAll(Specification<Event> spec) {
         return eventRepository.findAll(spec);
     }
+
+    public EventDto save(Event event) {
+        return eventMapper.toDto(eventRepository.save(event));
+    }
 }

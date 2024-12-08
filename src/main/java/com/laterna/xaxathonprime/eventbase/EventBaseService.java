@@ -102,4 +102,8 @@ public class EventBaseService {
                 .map(eventBaseMapper::toDto)
                 .orElseThrow(() -> new EntityNotFoundException("Event not found"));
     }
+
+    public EventBaseDto save(EventBase eventBase) {
+        return eventBaseMapper.toDto(eventBaseRepository.save(eventBase));
+    }
 }
